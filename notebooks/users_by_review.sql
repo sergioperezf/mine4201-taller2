@@ -1,0 +1,1 @@
+select users.*, (@cnt := @cnt + 1) AS rowNumber  from (select DISTINCT user.id, user.review_count from user, review, business where user.id = review.user_id and business.id = review.business_id and business.city = 'Toronto' ORDER BY user.review_count desc) as users CROSS JOIN (SELECT @cnt := 0) AS dummy;
