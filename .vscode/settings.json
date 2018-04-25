@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "${workspaceFolder}/app/bin/python",
+    "python.linting.enabled": false
+}
