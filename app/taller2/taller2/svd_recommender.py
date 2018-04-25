@@ -7,14 +7,11 @@ from collections import defaultdict
 
 from pymongo import MongoClient
 
-client = MongoClient()
-db = client['test']
 df = pd.read_csv( '../notebooks/toronto_reviews.csv')
 df2 = df[[ 'user_id', 'business_id', 'stars'] ]
 reader = Reader( rating_scale = ( 1, 5 ) )
 train_data = Dataset.load_from_df( df2[ [ 'user_id', 'business_id', 'stars' ] ], reader )
 train_data = train_data.build_full_trainset()
-mean = train_data.global_mean
 
 algo_pkl = open('../notebooks/svd_algo.pickle', 'rb')
 algo = pickle.load(algo_pkl)
@@ -47,9 +44,3 @@ def get_recommendations_for_user(user_id):
     except KeyError:
         print('recommendations not found')
         return {}
-
-
-recommendations = get_recommendations_for_user('zsZVg16yjZu5NIiS0ayjrQ')
-
-for recommendation in recommendations:
-    print(list(db.business.find({'business_id': recommendation[0]}))[0]['name'])

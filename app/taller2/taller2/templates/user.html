@@ -1,0 +1,28 @@
+<html>
+
+Hello, {{ user.name }}!
+
+These are your recommendations:
+
+Content-based: 
+<ul>
+{% for rec, val in content.items %}
+    <li>{{ rec }}: {{ val }}</li>
+{% endfor %}
+</ul>
+
+SVD-based: 
+<ul>
+{% for rec, val in svd.items %}
+    <li>{{ rec }}: {{ val }}</li>
+{% endfor %}
+</ul>
+
+Collaborative-based: 
+<ul>
+{% for rec, val in collab.items %}
+    <li>{{ rec }}: {{ val }}</li>
+{% endfor %}
+</ul>
+
+</html>

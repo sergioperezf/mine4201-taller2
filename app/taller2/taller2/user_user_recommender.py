@@ -6,8 +6,6 @@ from surprise.prediction_algorithms.knns import *
 
 from pymongo import MongoClient
 
-client = MongoClient()
-db = client['test']
 dataset = pickle.load(open('../notebooks/toronto_reviews_array.pickle', 'rb'))
 surprise_ds = dataset.stack()
 surprise_ds.reset_index(level = [0, 1], inplace = True)
@@ -48,8 +46,3 @@ def get_recommendations_for_user(user_id):
     except KeyError:
         print('recommendations not found')
         return {}
-
-recommendations = get_recommendations_for_user('zsZVg16yjZu5NIiS0ayjrQ')
-
-for recommendation in recommendations:
-    print(list(db.business.find({'business_id': recommendation[0]}))[0]['name'])
